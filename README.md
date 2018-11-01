@@ -1,6 +1,8 @@
 # Templast
 
-The "lightest and fastest"® way to:
+The "lightest and fastest"® way to interpolate a string with placeholder and have a blast!
+
+Templast comes with two methods:
 
 - replace placeholders in a string.
 - compile the replacement operation into a re-usable function for maximum performance.

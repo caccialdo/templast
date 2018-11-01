@@ -1,5 +1,6 @@
 {
   "name": "templast",
+  "description": "The lightest and fastest way to interpolate a string with placeholder and have a blast",
   "version": "1.0.0",
   "license": "MIT",
   "main": "index.js",
