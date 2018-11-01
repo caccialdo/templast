@@ -1,29 +1,29 @@
 const _ = require('lodash')
 
-module.exports = function template (str, replaceVars = []) {
-  if (!str) {
+module.exports = function template (templateStr, templateVars = []) {
+  if (!templateStr) {
     return () => ''
   }
 
-  if (!replaceVars.length) {
-    return () => str
+  if (!templateVars.length) {
+    return () => templateStr
   }
 
-  const regex = new RegExp(replaceVars.map(_.escapeRegExp).join('|'), 'g')
+  const regex = new RegExp(templateVars.map(_.escapeRegExp).join('|'), 'g')
   const crumbs = []
 
   let scanIndex = 0
-  str.replace(regex, (varName, startIndex) => {
+  templateStr.replace(regex, (varName, startIndex) => {
     if (scanIndex < startIndex) {
-      crumbs.push(str.substring(scanIndex, startIndex))
+      crumbs.push(templateStr.substring(scanIndex, startIndex))
     }
 
-    crumbs.push(replaceVars.indexOf(varName))
+    crumbs.push(templateVars.indexOf(varName))
     scanIndex = startIndex + varName.length
   })
 
-  if (scanIndex < str.length) {
-    crumbs.push(str.substring(scanIndex, str.length))
+  if (scanIndex < templateStr.length) {
+    crumbs.push(templateStr.substring(scanIndex, templateStr.length))
   }
 
   // eslint-disable-next-line no-new-func
@@ -32,7 +32,7 @@ module.exports = function template (str, replaceVars = []) {
     'return ' + crumbs
       .map(crumb => {
         if (_.isNumber(crumb)) {
-          return `(__REPLACE_VARS__["${replaceVars[crumb]}"] || "${replaceVars[crumb]}")`
+          return `(__REPLACE_VARS__["${templateVars[crumb]}"] || "${templateVars[crumb]}")`
         }
 
         return JSON.stringify(crumb)
