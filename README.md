@@ -14,27 +14,27 @@ yarn add templast
 ```js
 import Templast from 'templast'
 
-const someLargeString = '[...] If you __CALL_ME_AS_YOU_WISH__, get ready to BECAUSE_WHY_NOT! [...]'
+const someLargeString = '[...] If you __DO_THIS__, get ready to __FOR_THAT__! [...]'
 
 /**
  * Option 1: Doing a one-off replacement
  */
 const interpolatedString = Templast.replace(someLargeString, {
-  '__CALL_ME_AS_YOU_WISH__': 'change your decision',
-  'BECAUSE_WHY_NOT': 'face the consequences'
-}) // => '[...] If you change your decision, get ready to face the consequences! [...]'
+  '__DO_THIS__': 'travel around the world',
+  '__FOR_THAT__': 'make new friends'
+}) // => '[...] If you travel around the world, get ready to make new friends! [...]'
 
 /**
  * Option 2: Compiling it for easy and fast re-usability
  */
-const templateFn = Templast.compile(someLargeString, ['__CALL_ME_AS_YOU_WISH__', 'BECAUSE_WHY_NOT'])
+const templateFn = Templast.compile(someLargeString, ['__DO_THIS__', '__FOR_THAT__'])
 
 const interpolatedString1 = templateFn({
-  '__CALL_ME_AS_YOU_WISH__': 'jump in the pond',
-  'BECAUSE_WHY_NOT': 'get wet'
+  '__DO_THIS__': 'jump in the pond',
+  '__FOR_THAT__': 'get wet'
 }) // => '[...] If you jump in the pond, get ready to get wet! [...]'
 const interpolatedString2 = templateFn({
-  '__CALL_ME_AS_YOU_WISH__': 'skip breakfast',
-  'BECAUSE_WHY_NOT': 'be hungry'
+  '__DO_THIS__': 'skip breakfast',
+  '__FOR_THAT__': 'be hungry'
 }) // => '[...] If you skip breakfast, get ready to be hungry! [...]'
 ```
