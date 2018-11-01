@@ -3,6 +3,7 @@
   "description": "The lightest and fastest way to interpolate a string with placeholder and have a blast",
   "version": "1.0.0",
   "license": "MIT",
+  "repository": "github:caccialdo/templast",
   "main": "index.js",
   "scripts": {
     "lint": "standard",
