@@ -1,6 +1,14 @@
 const _ = require('lodash')
 
-module.exports = function template (str, replaceVars) {
+module.exports = function template (str, replaceVars = []) {
+  if (!str) {
+    return () => ''
+  }
+
+  if (!replaceVars.length) {
+    return () => str
+  }
+
   const regex = new RegExp(replaceVars.map(_.escapeRegExp).join('|'), 'g')
   const crumbs = []
 
@@ -18,12 +26,13 @@ module.exports = function template (str, replaceVars) {
     crumbs.push(str.substring(scanIndex, str.length))
   }
 
+  // eslint-disable-next-line no-new-func
   return new Function(
     '__REPLACE_VARS__',
     'return ' + crumbs
       .map(crumb => {
         if (_.isNumber(crumb)) {
-          return `(__REPLACE_VARS__.${replaceVars[crumb]}||"${replaceVars[crumb]}")`
+          return `(__REPLACE_VARS__["${replaceVars[crumb]}"] || "${replaceVars[crumb]}")`
         }
 
         return JSON.stringify(crumb)
