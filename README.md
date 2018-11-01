@@ -6,6 +6,7 @@ The "lightest and fastest"® way to:
 - compile the replacement operation into a re-usable function for maximum performance.
 
 ```sh
+npm install templast
 yarn add templast
 ```
 
