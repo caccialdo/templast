@@ -1,3 +1,4 @@
 module.exports = {
-  template: require('./src/template')
+  template: require('./src/template'),
+  replace: require('./src/replace')
 }
