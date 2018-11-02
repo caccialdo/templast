@@ -9,11 +9,11 @@ module.exports = function template (templateStr, templateVars = []) {
     return () => templateStr
   }
 
-  const regex = new RegExp(templateVars.map(_.escapeRegExp).join('|'), 'g')
+  const regex = new RegExp('\\b(' + templateVars.map(_.escapeRegExp).join('|') + ')\\b', 'g')
   const crumbs = []
 
   let scanIndex = 0
-  templateStr.replace(regex, (varName, startIndex) => {
+  templateStr.replace(regex, (__, varName, startIndex) => {
     if (scanIndex < startIndex) {
       crumbs.push(templateStr.substring(scanIndex, startIndex))
     }

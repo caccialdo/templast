@@ -26,6 +26,12 @@ const scenarii = [{
   replaceVars: { HELLO: 'Hello' },
   result: 'Hello world'
 }, {
+  title: 'With a replace var joint to another word',
+  template: 'Hello WORLDs',
+  templateVars: ['WORLD'],
+  replaceVars: { WORLD: 'world' },
+  result: 'Hello WORLDs'
+}, {
   title: 'With more vars than declared',
   template: 'HELLO world',
   templateVars: ['HELLO', 'WORLD'],
