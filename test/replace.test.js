@@ -1,5 +1,6 @@
 /* global test, expect */
 const Templast = require('..')
+const rollupReplace = require('../benchmark/alternatives/rollup-plugin-replace')
 
 const scenarii = [{
   title: 'One var in the middle of the template',
@@ -93,5 +94,9 @@ const scenarii = [{
 scenarii.forEach(scenario => {
   test(`#replace - ${scenario.title}`, () => {
     expect(Templast.replace(scenario.template, scenario.replaceVars)).toBe(scenario.result)
+  })
+
+  test(`(rollup-plugin-replace) #replace - ${scenario.title}`, () => {
+    expect(rollupReplace(scenario.template, scenario.replaceVars)).toBe(scenario.result)
   })
 })

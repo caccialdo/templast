@@ -1,5 +1,6 @@
 /* global test, expect */
 const Templast = require('..')
+const rollupReplace = require('../benchmark/alternatives/rollup-plugin-replace')
 
 const scenarii = [{
   title: 'One var in the middle of the template',
@@ -38,12 +39,14 @@ const scenarii = [{
   replaceVars: { HELLO: 'Hello' },
   result: 'Hello world'
 }, {
+  templateSpecific: true,
   title: 'With no matching var declared',
   template: 'HELLO world',
   templateVars: ['WORLD'],
   replaceVars: { HELLO: 'Hello' },
   result: 'HELLO world'
 }, {
+  templateSpecific: true,
   title: 'With no var declared',
   template: 'HELLO world',
   templateVars: [],
@@ -118,4 +121,10 @@ scenarii.forEach(scenario => {
     const templateFn = Templast.template(scenario.template, scenario.templateVars)
     expect(templateFn(scenario.replaceVars)).toBe(scenario.result)
   })
+
+  if (!scenario.templateSpecific) {
+    test(`(rollup-plugin-replace) #template - ${scenario.title}`, () => {
+      expect(rollupReplace(scenario.template, scenario.replaceVars)).toBe(scenario.result)
+    })
+  }
 })
