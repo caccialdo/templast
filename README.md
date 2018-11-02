@@ -41,3 +41,15 @@ const interpolatedString2 = templateFn({
   '__FOR_THAT__': 'be hungry'
 }) // => '[...] If you skip breakfast, get ready to be hungry! [...]'
 ```
+
+## Performance
+
+You can run the benchmark task via `npm run benchmark`. This benchmark runs 1000 (identical) replace operations on the `react-dom` unminified source code.
+
+On my early 2015 13in 2.7GHz i5 macbook pro, results are as follow:
+
+```
+rollup-plugin-replace: 9796.988ms (1x)
+Templast.replace:      2499.369ms (~4x)
+Templast.template:     69.188ms   (~140x)
+``` 
